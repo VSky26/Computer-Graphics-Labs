@@ -102,6 +102,7 @@ int main( void )
     Model teapot("../assets/teapot.obj");
     Model sphere("../assets/sphere.obj");
     
+    
     // Load the textures
     teapot.addTexture("../assets/blue.bmp", "diffuse");
     teapot.addTexture("../assets/diamond_normal.png", "normal");
@@ -134,28 +135,26 @@ int main( void )
     
     // Teapot positions
     glm::vec3 teapotPositions[] = {
-        glm::vec3( 0.0f,  0.0f,  0.0f),
-        glm::vec3( 2.0f,  5.0f, -10.0f),
-        glm::vec3(-3.0f, -2.0f, -3.0f),
-        glm::vec3(-4.0f, -2.0f, -8.0f),
-        glm::vec3( 2.0f,  2.0f, -6.0f),
-        glm::vec3(-4.0f,  3.0f, -8.0f),
-        glm::vec3( 0.0f, -2.0f, -5.0f),
-        glm::vec3( 4.0f,  2.0f, -4.0f),
-        glm::vec3( 2.0f,  0.0f, -2.0f),
-        glm::vec3(-1.0f,  1.0f, -2.0f)
+        glm::vec3( 0.0f,  0.0f,  8.0f),
+        glm::vec3( 0.0f,  0.0f,  -8.0f),
+        glm::vec3( 8.0f,  0.0f,  0.0f),
+        glm::vec3( -8.0f,  0.0f,  0.0f),
+        glm::vec3( 5.0f,  0.0f,  5.0f),
+        glm::vec3( -5.0f,  0.0f,  -5.0f),
+        glm::vec3( 5.0f,  0.0f,  -5.0f),
+        glm::vec3(-5.0f,  0.0f,  5.0f),
     };
 
     // Add teapots to objects vector
     std::vector<Object> objects;
     Object object;
     object.name = "teapot";
-    for (unsigned int i = 0 ; i < 10 ; i++)
+    for (unsigned int i = 0 ; i < 8 ; i++)
     {
         object.position = teapotPositions[i];
         object.rotation = glm::vec3(1.0f, 1.0f, 1.0f);
         object.scale    = glm::vec3(0.75f, 0.75f, 0.75f);
-        object.angle    = Maths::radians(20.0f * i);
+        object.angle    = Maths::radians(0.0f * i);
         objects.push_back(object);
     }
 
@@ -172,12 +171,37 @@ int main( void )
     floor.Ns = 20.0f;
 
     // Add floor model to objects vector
-    object.position = glm::vec3(0.0f, -0.85f, 0.0f);
+    object.position = glm::vec3(0.0f, -0.65f, 0.0f);
     object.scale = glm::vec3(1.0f, 1.0f, 1.0f);
     object.rotation = glm::vec3(0.0f, 1.0f, 0.0f);
     object.angle = 0.0f;
     object.name = "floor";
     objects.push_back(object);
+
+    Model box("../assets/cube.obj");
+    box.addTexture("../assets/crate.jpg", "diffuse");
+    box.addTexture("../assets/diamond_normal.png", "normal");
+    box.addTexture("../assets/neutral_specular.png", "specular");
+
+    box.ka = 0.2f;
+    box.kd = 0.7f;
+    box.ks = 1.0f;
+    box.Ns = 20.0f;
+
+    glm::vec3 boxPositions[] = {
+        glm::vec3(0.0f,  0.1f,  0.0f),
+    };
+
+    object.name = "box";
+    for (unsigned int i = 0; i < boxPositions->length(); i++)
+    {
+        object.position = boxPositions[i];
+        object.rotation = glm::vec3(1.0f, 1.0f, 1.0f);
+        object.scale = glm::vec3(0.75f, 0.75f, 0.75f);
+        object.angle = Maths::radians(0.1f);
+        objects.push_back(object);
+    }
+
     
     // Render loop
     while (!glfwWindowShouldClose(window))
@@ -226,6 +250,8 @@ int main( void )
 
             if (objects[i].name == "floor")
                 floor.draw(shaderID);
+            if (objects[i].name == "box")
+                box.draw(shaderID);
         }
         
         // Draw light sources
