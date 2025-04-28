@@ -116,22 +116,46 @@ int main( void )
     
     // Add light sources
     Light lightSources;
-    lightSources.addPointLight(glm::vec3(2.0f, 2.0f, 2.0f),         // position
-                               glm::vec3(1.0f, 1.0f, 1.0f),         // colour
+    lightSources.addPointLight(glm::vec3(0.0f, 2.0f, 8.0f),         // position
+                               glm::vec3(1.0f, 0.0f, 1.0f),         // colour
                                1.0f, 0.1f, 0.02f);                  // attenuation
+
+    lightSources.addPointLight(glm::vec3(0.0f, 2.0f, -8.0f),        
+                               glm::vec3(1.0f, 0.0f, 1.0f),         
+                               1.0f, 0.1f, 0.02f);                  
     
-    lightSources.addPointLight(glm::vec3(1.0f, 1.0f, -8.0f),        // position
-                               glm::vec3(1.0f, 1.0f, 1.0f),         // colour
-                               1.0f, 0.1f, 0.02f);                  // attenuation
-    
+    lightSources.addPointLight(glm::vec3(8.0f, 2.0f, 0.0f),         
+                               glm::vec3(1.0f, 0.0f, 1.0f),         
+                               1.0f, 0.1f, 0.02f);                  
+
+    lightSources.addPointLight(glm::vec3(-8.0f, 2.0f, 0.0f),        
+                               glm::vec3(1.0f, 0.0f, 1.0f),         
+                               1.0f, 0.1f, 0.02f);                  
+
+    lightSources.addPointLight(glm::vec3(5.0f, 2.0f, 5.0f),         
+                               glm::vec3(0.5f, 0.0f, 0.5f),         
+                               1.0f, 0.1f, 0.02f);                  
+
+    lightSources.addPointLight(glm::vec3(-5.0f, 2.0f, -5.0f),       
+                               glm::vec3(0.5f, 0.0f, 0.5f),         
+                               1.0f, 0.1f, 0.02f);                  
+
+    lightSources.addPointLight(glm::vec3(5.0f, 2.0f, -5.0f),        
+                               glm::vec3(0.5f, 0.0f, 0.5f),         
+                               1.0f, 0.1f, 0.02f);                  
+
+    lightSources.addPointLight(glm::vec3(-5.0f, 2.0f, 5.0f),        
+                               glm::vec3(0.5f, 0.0f, 0.5f),         
+                               1.0f, 0.1f, 0.02f);                  
+
     lightSources.addSpotLight(glm::vec3(0.0f, 3.0f, 0.0f),          // position
                               glm::vec3(0.0f, -1.0f, 0.0f),         // direction
-                              glm::vec3(1.0f, 1.0f, 1.0f),          // colour
+                              glm::vec3(2.0f, 2.0f, 2.0f),          // colour
                               1.0f, 0.1f, 0.02f,                    // attenuation
                               std::cos(Maths::radians(45.0f)));     // cos(phi)
     
-    lightSources.addDirectionalLight(glm::vec3(1.0f, -1.0f, 0.0f),  // direction
-                                     glm::vec3(1.0f, 1.0f, 0.0f));  // colour
+    lightSources.addDirectionalLight(glm::vec3(0.0f, -1.0f, 0.0f),  // direction
+                                     glm::vec3(0.0f, 1.0f, 0.0f));  // colour
     
     // Teapot positions
     glm::vec3 teapotPositions[] = {
